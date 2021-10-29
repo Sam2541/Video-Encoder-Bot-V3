@@ -1,0 +1,57 @@
+{
+  "name": "ENCODER BOT",
+  "description": "Telegram's best Video Encoder Bot",
+  "logo": "https://telegra.ph//file/d9d6d3d5bd820e1b5baae.jpg",
+  "keywords": [
+    "Telegram",
+    "best",
+    "Video",
+    "Encoder",
+    "Bot"
+  ],
+  "success_url": "https://t.me/linux_repo",
+  "website": "https://t.me/Discovery_Updates",
+  "repository": "https://github.com/AbirHasan2005/VideoCompress",
+  "env": {
+    "ENV": {
+      "description": "Setting this to ANYTHING will enable VARs when in ENV mode",
+      "value": "ANYTHING"
+    },
+    "SESSION_NAME": {
+      "description": "Keep this default",
+      "value": "AHCompressBot",
+      "required": true
+    },
+    "TG_BOT_TOKEN": {
+      "description": "Your bot token, as a string. Get this from @BotFather",
+      "value": "",
+      "required": true
+    },
+    "APP_ID": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": "",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": "",
+      "required": true
+    },
+    "BOT_USERNAME": {
+      "description": "Your Bot Username. Without `@` before Username! ",
+      "value": "",
+      "required": true
+    },
+    "LOG_CHANNEL": {
+      "description": "Create A Public Channel And Enter Username Without @ And Also Add Your Bot As Admin In The Channel.",
+      "value": "",
+      "required": true
+    },
+    "AUTH_USERS": {
+      "description": "Allow only pre-defined users to use this bot as Sudo User. Separate with Space. Just for using Admin Commands.",
+      "value": "1553219399",
+      "required": true
+    }
+  },
+  "stack": "container"
+}
