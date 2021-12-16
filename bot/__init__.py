@@ -8,7 +8,7 @@ from logging.handlers import RotatingFileHandler
 import os
 import time
 from pyrogram import Client
-
+from bot.config import Config
 
 # TODO: is there a better way?
 
@@ -76,4 +76,4 @@ logging.basicConfig(
 )
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 logging.getLogger("urllib3").setLevel(logging.WARNING)
-LOGGER = logging.getLogger(__name__)
+Config.LOGGER = logging.getLogger(__name__)
