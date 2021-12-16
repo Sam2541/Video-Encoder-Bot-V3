@@ -428,7 +428,6 @@ async def incoming_compress_message_f(update):
     
 async def incoming_cancel_message_f(bot, update):
   """/cancel command"""
-      await update.message.delete()
   status = DOWNLOAD_LOCATION + "/status.json"
   if os.path.exists(status):
     inline_keyboard = []
