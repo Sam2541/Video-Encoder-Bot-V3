@@ -14,7 +14,6 @@ import traceback
 
 from bot import (
     BOT_START_TIME,
-    LOGGER,
     LOG_FILE_ZZGEVC,
     MAX_MESSAGE_LENGTH,
     crf,
