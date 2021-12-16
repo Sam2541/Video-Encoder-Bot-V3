@@ -73,7 +73,6 @@ async def exec_message_f(client, message):
             await message.delete()
         else:
             await message.reply_text(OUTPUT)
-  else:
     return
 async def eval_message_f(client, message):
         status_message = await message.reply_text("Processing ...")
