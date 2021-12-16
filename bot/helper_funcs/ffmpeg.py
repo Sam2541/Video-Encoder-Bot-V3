@@ -1,6 +1,6 @@
  
 
-
+from bot.config import Config
 import asyncio
 import os
 import time
@@ -138,8 +138,8 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
       #return None
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
-    LOGGER.info(e_response)
-    LOGGER.info(t_response)
+    Config.LOGGER.info(e_response)
+    Config.LOGGER.info(t_response)
     del pid_list[0]
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
