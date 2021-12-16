@@ -428,8 +428,7 @@ async def incoming_compress_message_f(update):
     
 async def incoming_cancel_message_f(bot, update):
   """/cancel command"""
-  #if update.from_user.id != 1391975600 or 888605132 or 1760568371:
-  if update.from_user.id not in AUTH_USERS:      
+  #if update.from_user.id != 1391975600 or 888605132 or 1760568371:    
         
     try:
       await update.message.delete()
