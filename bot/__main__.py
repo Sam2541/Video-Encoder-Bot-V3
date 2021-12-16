@@ -5,7 +5,6 @@ from bot import (
     APP_ID,
     API_HASH,
     DOWNLOAD_LOCATION,
-    LOGGER,
     TG_BOT_TOKEN,
     BOT_USERNAME,
     SESSION_NAME,
