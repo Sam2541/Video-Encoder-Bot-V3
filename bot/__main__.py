@@ -38,7 +38,6 @@ from bot.plugins.status_message_fn import (
 from bot.commands import Command
 from bot.plugins.call_back_button_handler import button
 from bot.commands import Command
-from bot.plugins.call_back_button_handler import button
 
 uptime = dt.now()
 
