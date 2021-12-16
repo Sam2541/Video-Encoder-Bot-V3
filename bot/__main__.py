@@ -37,7 +37,7 @@ from bot.plugins.status_message_fn import (
 
 from bot.commands import Command
 from bot.plugins.call_back_button_handler import button
-sudo_users = "1553219399" 
+
 
 uptime = dt.now()
 
@@ -108,7 +108,6 @@ if __name__ == "__main__" :
         
     @app.on_message(filters.incoming & (filters.video | filters.document))
     async def help_message(app, message):
-
         query = await message.reply_text("Added to Queue ⏰...\nPlease be patient, Compress will start soon", quote=True)
         data.append(message)
         if len(data) == 1:
@@ -117,7 +116,6 @@ if __name__ == "__main__" :
             
     @app.on_message(filters.incoming & (filters.photo))
     async def help_message(app, message):
-
         os.system('rm thumb.jpg')
         await message.download(file_name='/app/thumb.jpg')
         await message.reply_text('Thumbnail Added')
