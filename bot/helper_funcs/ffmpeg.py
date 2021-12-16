@@ -1,14 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K | @AbirHasan2005
+ 
 
-# the logging things
-import logging
-logging.basicConfig(
-    level=logging.DEBUG, 
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-LOGGER = logging.getLogger(__name__)
 
 import asyncio
 import os
@@ -25,64 +16,46 @@ from bot.localisation import Localisation
 from bot import (
     FINISHED_PROGRESS_STR,
     UN_FINISHED_PROGRESS_STR,
-    DOWNLOAD_LOCATION
+    DOWNLOAD_LOCATION,
+    crf,
+    watermark,
+    pid_list,
+    resolution,
+    bit,
+    preset
 )
 
-async def convert_video(video_file, output_directory, total_time, bot, message, target_percentage, isAuto, bug):
+async def convert_video(video_file, output_directory, total_time, bot, message, chan_msg):
     # https://stackoverflow.com/a/13891070/4723940
-    out_put_file_name = output_directory + \
-        "/" + str(round(time.time())) + ".mp4"
+    kk = video_file.split("/")[-1]
+    aa = kk.split(".")[-1]
+    out_put_file_name = kk.replace(f".{aa}", " [FIERCENETWORK].mkv")
+    #out_put_file_name = video_file + "_compressed" + ".mkv"
     progress = output_directory + "/" + "progress.txt"
     with open(progress, 'w') as f:
       pass
-    
-    file_genertor_command = [
-      "ffmpeg",
-      "-hide_banner",
-      "-loglevel",
-      "quiet",
-      "-progress",
-      progress,
-      "-i",
-      video_file,
-      "-c:v", 
-      "h264",
-      "-preset", 
-      "ultrafast",
-      "-tune",
-      "film",
-      "-c:a",
-      "copy",
-      out_put_file_name
-    ]
-    if not isAuto:
-      filesize = os.stat(video_file).st_size
-      calculated_percentage = 100 - target_percentage
-      target_size = ( calculated_percentage / 100 ) * filesize
-      target_bitrate = int(math.floor( target_size * 8 / total_time ))
-      if target_bitrate // 1000000 >= 1:
-        bitrate = str(target_bitrate//1000000) + "M"
-      elif target_bitrate // 1000 > 1:
-        bitrate = str(target_bitrate//1000) + "k"
-      else:
-        return None
-      extra = [ "-b:v", 
-                bitrate,
-                "-bufsize",
-                bitrate
-              ]
-      for elem in reversed(extra) :
-        file_genertor_command.insert(10, elem)
-    else:
-       target_percentage = 'auto'
+    ##  -metadata title='DarkEncodes [Join t.me/AnimesInLowSize]' -vf drawtext=fontfile=Italic.ttf:fontsize=20:fontcolor=black:x=15:y=15:text='Dark Encodes'
+    ##"-metadata", "title=@SenpaiAF", "-vf", "drawtext=fontfile=njnaruto.ttf:fontsize=20:fontcolor=black:x=15:y=15:text=" "Dark Encodes",
+     ## -vf eq=gamma=1.4:saturation=1.4
+     ## lol 😂
+    crf.append("26.2 -map 0")
+    resolution.append("1280x720")
+    bit.append("yuv420p")
+    preset.append("veryfast")
+    watermark.append('-vf "drawtext=fontfile=font.ttf:fontsize=25:fontcolor=white:bordercolor=black@0.50:x=w-tw-10:y=10:box=1:boxcolor=black@0.5:boxborderw=6:text=FIERCENETWORK"')
+    file_genertor_command = f'ffmpeg -hide_banner -loglevel quiet -progress "{progress}" -i "{video_file}" -c:v libx265  -crf {crf[0]} -c:s copy -preset fast -pix_fmt yuv420p10le -vf scale=1280:trunc(ow/a/2)*2 -x265-params no-info=1 -metadata title="Moviez Café™ | 720p.10bit.HEVC.x265"  -metadata:s:v title="W∆L13R - 720p/ 10bit/ HEVC"  -metadata:s:a title="Opus ~ W∆L13R" -metadata:s:s title="English ~ W∆L13R" -c:a libopus -b:a 64k "{out_put_file_name}" -y'
+ #For Ffmpeg Use
     COMPRESSION_START_TIME = time.time()
-    process = await asyncio.create_subprocess_exec(
-        *file_genertor_command,
-        # stdout must a pipe to be accessible as process.stdout
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
+    process = await asyncio.create_subprocess_shell(
+          file_genertor_command,
+          # stdout must a pipe to be accessible as process.stdout
+           stdout=asyncio.subprocess.PIPE,
+           stderr=asyncio.subprocess.PIPE,
+          )
+    #stdout, stderr = await process.communicate()
+    
     LOGGER.info("ffmpeg_process: "+str(process.pid))
+    pid_list.insert(0, process.pid)
     status = output_directory + "/status.json"
     with open(status, 'r+') as f:
       statusMsg = json.load(f)
@@ -148,16 +121,26 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
         try:
           await bug.edit_text(text=stats)
         except:
-          pass
+          pass        
         
-    # Wait for the subprocess to finish
+        
     stdout, stderr = await process.communicate()
+    r = stderr.decode()
+    try:
+        if er:
+           await message.edit_text(str(er) + "\n\n**ERROR** Contact @SenpaiAF")
+           os.remove(videofile)
+           os.remove(out_put_file_name)
+           return None
+    except BaseException:
+            pass
     #if( not isDone):
       #return None
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
     LOGGER.info(e_response)
     LOGGER.info(t_response)
+    del pid_list[0]
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
     else:
@@ -193,7 +176,6 @@ async def media_info(saved_file_path):
   return total_seconds, bitrate
   
 async def take_screen_shot(video_file, output_directory, ttl):
-    # https://stackoverflow.com/a/13891070/4723940
     out_put_file_name = os.path.join(
         output_directory,
         str(time.time()) + ".jpg"
@@ -209,7 +191,7 @@ async def take_screen_shot(video_file, output_directory, ttl):
             "1",
             out_put_file_name
         ]
-        # width = "90"
+        
         process = await asyncio.create_subprocess_exec(
             *file_genertor_command,
             # stdout must a pipe to be accessible as process.stdout
@@ -225,3 +207,4 @@ async def take_screen_shot(video_file, output_directory, ttl):
         return out_put_file_name
     else:
         return None
+# senpai I edited this,  maybe if it is wrong correct it 
