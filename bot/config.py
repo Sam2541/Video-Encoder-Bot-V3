@@ -1,11 +1,5 @@
 import logging
 
-logging.basicConfig(
-    format='%(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.FileHandler('log.txt'),
-              logging.StreamHandler()],
-    level=logging.INFO
-)
 from bot.get_cfg import get_config
     
 
