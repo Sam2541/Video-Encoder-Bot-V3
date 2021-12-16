@@ -26,7 +26,7 @@ from bot.helper_funcs.display_progress import (
   TimeFormatter,
   humanbytes
 )
-
+from bot.config import Config
 from pyrogram import Client, filters
 from pyrogram.handlers import MessageHandler, CallbackQueryHandler
 from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
@@ -223,8 +223,8 @@ async def incoming_compress_message_f(update):
         )
       )
       saved_file_path = video
-      LOGGER.info(saved_file_path)  
-      LOGGER.info(video)
+      Config.LOGGER.info(saved_file_path)  
+      Config.LOGGER.info(video)
       if( video is None ):
         try:
           await sent_message.edit_text(
@@ -242,7 +242,7 @@ async def incoming_compress_message_f(update):
         except:
           pass
        # delete_downloads()
-        LOGGER.info("Download stopped")
+        Config.LOGGER.info("Download stopped")
         return
   except (ValueError) as e:
       try:
@@ -324,7 +324,7 @@ async def incoming_compress_message_f(update):
            compress_start
          )
     compressed_time = TimeFormatter((time.time() - c_start)*1000)
-    LOGGER.info(o)
+    Config.LOGGER.info(o)
     if o == 'stopped':
       return
     if o is not None:
@@ -388,7 +388,7 @@ async def incoming_compress_message_f(update):
       now = f"\n{ist} (GMT+05:30)`\n`{bst} (GMT+06:00)"
       await upload_start.delete()
       await bot.send_message(chat_id, f"**Upload Done, Bot is Free Now !!** \n\nProcess Done at `{now}`", parse_mode="markdown")
-      LOGGER.info(upload.caption);
+      Config.LOGGER.info(upload.caption);
       try:
         await upload.edit_caption(
           caption=upload.caption.replace('{}', uploaded_time)
