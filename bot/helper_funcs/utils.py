@@ -1,4 +1,4 @@
-from bot.config import LOGGING
+from bot.config import Config
 import logging
 logging.basicConfig(
     level=logging.DEBUG,
@@ -29,5 +29,5 @@ async def add_task(message: Message):
         os.system('rm -rf /app/downloads/*')
         await incoming_compress_message_f(message)
     except Exception as e:
-        LOGGER.info(e)  
+        Config.LOGGER.info(e)  
     await on_task_complete()
