@@ -33,7 +33,6 @@ from bot.helper_funcs.display_progress import (
 
 
 async def exec_message_f(client, message):
-    if True:
         DELAY_BETWEEN_EDITS = 0.3
         PROCESS_RUN_TIME = 100
         cmd = message.text.split(" ", maxsplit=1)[1]
