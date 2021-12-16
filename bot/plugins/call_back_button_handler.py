@@ -19,7 +19,7 @@ logging.basicConfig(
 LOGGER = logging.getLogger(__name__)
 
 #from bot.helper_funcs.admin_check import AdminCheck
-
+from bot.config import Config
 
 async def button(bot, update: CallbackQuery):
     cb_data = update.data
@@ -28,7 +28,7 @@ async def button(bot, update: CallbackQuery):
         print(g)
     except:
         pass
-    LOGGER.info(update.message.reply_to_message.from_user.id)
+    Config.LOGGER.info(update.message.reply_to_message.from_user.id)
     if (update.from_user.id == update.message.reply_to_message.from_user.id) or g:
         print(cb_data)
         if cb_data == "fuckingdo":
