@@ -11,7 +11,7 @@ logging.basicConfig(
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 #
-
+from bot.config import Config
 import asyncio
 import math
 import os
@@ -59,22 +59,22 @@ async def down_load_media_f(client, message):
                 file_upload = await unzip_me(the_real_download_location_g)
                 if file_upload is not None:
                     g_response = await upload_to_gdrive(file_upload, mess_age, message, user_id)
-                    LOGGER.info(g_response)
+                    Config.LOGGER.info(g_response)
                     
             elif message.command[1] == "unrar":
                 file_uploade = await unrar_me(the_real_download_location_g)
                 if file_uploade is not None:
                     gk_response = await upload_to_gdrive(file_uploade, mess_age, message, user_id)
-                    LOGGER.info(gk_response)
+                    Config.LOGGER.info(gk_response)
                     
             elif message.command[1] == "untar":
                  file_uploadg = await untar_me(the_real_download_location_g)
                  if file_uploadg is not None:
                      gau_response = await upload_to_gdrive(file_uploadg, mess_age, message, user_id)
-                     LOGGER.info(gau_response)
+                     Config.LOGGER.info(gau_response)
         else:
             gaut_response = await upload_to_gdrive(the_real_download_location_g, mess_age, message, user_id)
-            LOGGER.info(gaut_response)
+            Config.LOGGER.info(gaut_response)
     else:
         #await asyncio.sleep(4)
         await mess_age.edit_text("Reply to a Telegram Media, to upload to the Cloud Drive.")
