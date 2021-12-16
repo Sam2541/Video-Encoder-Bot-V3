@@ -12,7 +12,6 @@ from bot import (
     LOGGER,
     LOG_FILE_ZZGEVC,
     MAX_MESSAGE_LENGTH,
-    AUTH_USERS,
     crf,
     watermark,
     data,
@@ -34,7 +33,6 @@ from bot.helper_funcs.display_progress import (
 
 
 async def exec_message_f(client, message):
-  if message.from_user.id in AUTH_USERS:
     if True:
         DELAY_BETWEEN_EDITS = 0.3
         PROCESS_RUN_TIME = 100
@@ -79,7 +77,6 @@ async def exec_message_f(client, message):
   else:
     return
 async def eval_message_f(client, message):
-    if message.from_user.id in AUTH_USERS:
         status_message = await message.reply_text("Processing ...")
         cmd = message.text.split(" ", maxsplit=1)[1]
 
@@ -143,7 +140,6 @@ async def aexec(code, client, message):
 
 
 async def upload_log_file(client, message):
-  if message.from_user.id in AUTH_USERS:
     await message.reply_document(
         LOG_FILE_ZZGEVC
     )
