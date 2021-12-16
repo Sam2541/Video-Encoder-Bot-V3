@@ -9,8 +9,7 @@ LOGGER = logging.getLogger(__name__)
 import os, time, asyncio, json
 from bot.localisation import Localisation
 from bot import (
-  DOWNLOAD_LOCATION, 
-  AUTH_USERS,
+  DOWNLOAD_LOCATION,
   LOG_CHANNEL,
   UPDATES_CHANNEL,
   SESSION_NAME,
@@ -87,7 +86,7 @@ async def incoming_start_message_f(bot, update):
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton('SOURCE CODE 🤤', url='https://t.me/shity_man')
+                    InlineKeyboardButton('SOURCE CODE', url='https://t.me/tellybots')
                 ]
             ]
         ),
