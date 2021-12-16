@@ -102,16 +102,14 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
             ''.join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 10))]),
             ''.join([UN_FINISHED_PROGRESS_STR for i in range(10 - math.floor(percentage / 10))])
             )
-        stats = f'📦️ <b>Encoding Is In Progress%\n\n' \
-                f'⏰️ <b>ETA:</b> {ETA}\n\n' \
-                f'{progress_str}\n'
+        stats = f'📦️ <b>Encoding Is In Progress%\n\n'
         try:
           await message.edit_text(
             text=stats,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [ 
-                        InlineKeyboardButton('❌ Cancel ❌', callback_data='fuckingdo') # Nice Call 🤭
+                        InlineKeyboardButton('❌ Cancel ❌', callback_data='cancel') # Nice Call 🤭
                     ]
                 ]
             )
