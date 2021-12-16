@@ -54,7 +54,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
           )
     #stdout, stderr = await process.communicate()
     
-    LOGGER.info("ffmpeg_process: "+str(process.pid))
+    Config.LOGGER.info("ffmpeg_process: "+str(process.pid))
     pid_list.insert(0, process.pid)
     status = output_directory + "/status.json"
     with open(status, 'r+') as f:
@@ -87,7 +87,7 @@ async def convert_video(video_file, output_directory, total_time, bot, message, 
           time_in_us = 1;
         if len(progress):
           if progress[-1] == "end":
-            LOGGER.info(progress[-1])
+            Config.LOGGER.info(progress[-1])
             isDone = True
             break
         execution_time = TimeFormatter((time.time() - COMPRESSION_START_TIME)*1000)
