@@ -1,18 +1,39 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K | @AbirHasan2005
+# (c) Shrimadhav U K | @AbirHasan2005 | Tellybots
+
 
 import asyncio
+import io
+import logging
 import os
 import shutil
+import sys
 import time
+import traceback
 
 from bot import (
     BOT_START_TIME,
     LOGGER,
     LOG_FILE_ZZGEVC,
-    MAX_MESSAGE_LENGTH
+    MAX_MESSAGE_LENGTH,
+    crf,
+    watermark,
+    data,
+    resolution,
+    pid_list,
+    bit,
+    preset
 )
+
+
+from bot.commands import Command
+from bot.localisation import Localisation
+from bot.helper_funcs.display_progress import (
+    TimeFormatter,
+    humanbytes
+)
+
 
 
 from bot.commands import Command
